@@ -1,0 +1,203 @@
+doctype html
+html
+  head
+    title SungKyunKwan University
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', crossorigin='anonymous')
+    script(src='https://code.jquery.com/jquery-3.3.1.min.js', integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=', crossorigin='anonymous')
+    script(src='javascript/script.js')
+    link(rel='stylesheet', type='text/css', href='css/style.css')
+  body
+    #my_nav.navbar.navbar-light.navbar-expand-lg.fixed-top
+      a#my_title.navbar-brand(href='#')
+        img(src='image/logo.jpg', width='300', height='100')
+      #navbarNav.collapse.navbar-collapse
+        ul.navbar-nav
+          li.nav-item.title_list
+            a.nav-link(href='#University') University College
+          li.nav-item.title_list
+            a.nav-link(href='#Confucian') Confucian Studies and Eastern Philosophy
+          li.nav-item.title_list
+            a.nav-link(href='#Liberal') Liberal Arts
+          li.nav-item.title_list
+            a.nav-link(href='#Social') Social Sciences
+          li.nav-item.title_list
+            a.nav-link(href='#Economics') Economics
+          li.nav-item.title_list
+            a.nav-link(href='#Business') Business
+          li.nav-item.title_list
+            a.nav-link(href='#Education') Education
+          li.nav-item.title_list
+            a.nav-link(href='#Art') Art
+      a.nav-link(href='#')
+    #register_popup.fixed-bottom.bg-white
+      if signin != 'yes'
+        form(id = "SigninForm" role="form" method="POST")
+          p
+            | Student Id 
+            input#newid(type='text', name = 'newid')
+          p
+            | Password 
+            input#newpassword(type='password', name = 'newpassword')
+          p
+            | Name 
+            input#newname(type = 'text', name = 'newname')
+          p
+            | Birth 
+            input#newbirth(type = 'date', name = 'newbirth')
+          p
+            | Department 
+            input#newdepartment(type = 'text', name = 'newdepartment')
+          button#RegisterBtn.btn.btn-light(type='button') Register
+
+      
+    #login_popup.fixed-bottom.bg-white
+      if signin != 'yes'
+        form(id = "LoginForm" role="form" method="POST")
+          p
+            | ID 
+            input#myid(type='text', name='id')
+          p
+            | PASSWORD 
+            input#pass(type='password', name='password')
+          button#LoginBtn.btn.btn-light(type='button') Login
+
+
+    #my_buttonNav.navbar.navbar-light.navbar-expand-lg.fixed-bottom
+      .nav-item
+        button.btn.btn-light(type='button', onclick="hideNavi('my_nav')") Hide/Show Navigation Bar
+      .nav-item
+        button.btn.btn-light(type='button', onclick="changeTableStyle('my_table')") White/Black Table Style
+      if signin != 'yes'
+        .nav-item
+          button#register.btn.btn-info.btn-lg(type='button', style='position: absolute; right: 100px; bottom:10px;') Sign Up
+        .nav-item
+          button#login.btn.btn-success.btn-lg(type='button', style='position: absolute; right: 10px; bottom:10px;') Login
+      else if signin == 'yes'
+        p
+          | User : #{student_id}
+        button#LogoutBtn.btn.btn-warning.btn-lg(type='button', style='position: absolute; right: 10px; bottom:10px;') Logout
+        button#GLSBtn.btn.btn-info.btn-lg(type='button', style='position:absolute; right: 120px; bottom:10px;') GLS
+
+    h1 Academics
+    h2.text-center.text-uppercase Colleges&Schools
+    #my_list_table.list-group
+      a.lead.list-group-item.list-group-item-action.list-group-item-success.text-center(href='/human')
+        b Humanities and Social Sciences Campus
+      a.lead.list-group-item.list-group-item-action.list-group-item-info.text-center(href='/natural')
+        b Natural Sciences Campus
+    h4#University University College
+    p.lead
+      | University College was launched in 2005 to systematically promote general and basic education and to support freshmen adjust to university life.
+      | University College directs liberal arts education in SKKU and realizes a 21st century learning community by providing academic and university life guidance to freshmen students, before choosing their major.
+    h4#Confucian College of Confucian Studies and Eastern Philosophy
+    p.lead
+      | The College of Confucian Studies & Eastern Philosophy is one of SKKU’s most important assets. The founding philosophy of the school serves as the moral backbone for the university community.
+    #my_table_0
+      table.table.table-striped.table-hover
+        tbody
+          tr
+            td  - Confucian and Oriental Studies 
+    h4#Liberal College of Liberal Arts
+    p.lead
+      | The College of Liberal Arts, formerly the College of Humanities, was co-founded with the establishment of the modern SKKU in 1946. As the center of liberal arts and humanity education, the college is dedicated to delivering an outstanding academic experience.
+    #my_table_1
+      table.table.table-striped.table-hover
+        tbody
+          tr
+            td  - Korean Language and Literature 
+          tr
+            td  - English Language and Literature 
+          tr
+            td  - French Language and Literature 
+          tr
+            td  - Chinese Language and Literature 
+          tr
+            td  - German Language and Literature 
+          tr
+            td  - Russian Language and Literature 
+          tr
+            td  - Korean Literature in Classical Chinese 
+          tr
+            td  - History 
+          tr
+            td  - Philosophy 
+          tr
+            td  - Library 
+    h4#Social College of Social Sciences
+    p.lead
+      | The College of Social Sciences was established to contribute to the nation and society by cultivating global citizens with democratic ethics and the academic competence to be leaders in their fields.
+    #my_table_2
+      table.table.table-striped.table-hover
+        tbody
+          tr
+            td  - Global Leader 
+          tr
+            td  - Public Administration 
+          tr
+            td  - Political Science and Diplomacy 
+          tr
+            td  - Journalism and Mass Communication 
+          tr
+            td  - Sociology 
+          tr
+            td  - Social Welfare 
+          tr
+            td  - Psychologye 
+          tr
+            td  - Consumer and Family Sciences 
+          tr
+            td  - Child Psychology and Education 
+    h4#Economics College of Economics
+    p.lead
+      | The College of Economics has faculty members who provide excellent education to students while leading excellent and influential researches in domestic and international academic and policy fields. In addition, while working hard for the future of Korea in all levels, It is made up of members of the students who are working hard on the study of the academic field and the character of the person as the best intelligence of the future Korea.
+    #my_table_3
+      table.table.table-striped.table-hover
+        tbody
+          tr
+            td  - Economics 
+          tr
+            td  - Statistics 
+          tr
+            td  - Global Economics 
+    h4#Business School of Business
+    p.lead
+      | The School of Business is a large organization with MBA, IMBA, and GSB in the MBA programs, and BA programs in the School of Business Administration and Global Business Administration. Many executives, professors, and management specialists are emerging, especially since the Samsung Group took over the foundation 20 years ago, it has achieved remarkable growth in many ways. Sungkyunkwan University was ranked as the first comprehensive private university in Korea by the international evaluation agency (The Times, US News & Report, etc.) and the domestic evaluation agency (Joongang Daily). In Financial Times, For the first time in a row, it is Korea's number one and is introducing it as an institution with a global MBA program.
+    #my_table_4
+      table.table.table-striped.table-hover
+        tbody
+          tr
+            td  - Business Administration 
+          tr
+            td  - Global Business Administration 
+    h4#Education College of Education
+    p.lead
+      | The College of Education founded in 1972, has inherited the tradition and spirit of the best national university in the Joseon Dynasty, Sung Kyun Kwan (成均館), founded in 1398. It has contributed to Korean education and national development by leading the field of education research, as well as cultivating good secondary school teachers and educationists over the past 40 years.
+    #my_table_5
+      table.table.table-striped.table-hover
+        tbody
+          tr
+            td  - Education 
+          tr
+            td  - Education in Classical Chinese 
+          tr
+            td  - Mathematics Education 
+          tr
+            td  - Computer Education 
+    h4#Art School of Art
+    #my_table_6
+      table.table.table-striped.table-hover
+        tbody
+          tr
+            td  - Fine Art 
+          tr
+            td  - Design 
+          tr
+            td  - Dance 
+          tr
+            td  - Film, Television and Multimedia 
+          tr
+            td  - Theatre 
+          tr
+            td  - Fashion Design 

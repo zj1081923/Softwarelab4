@@ -1,0 +1,224 @@
+doctype html
+html
+  head
+    title Welcome GLS
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', crossorigin='anonymous')
+    script(src='https://code.jquery.com/jquery-3.3.1.min.js', integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=', crossorigin='anonymous')
+    script(src='/javascript/script.js')
+    link(rel='stylesheet', type='text/css', href='/css/style.css')
+  body
+    #gls_row
+      img(src='/image/gls_head.jpg', style='width:100%')
+    #gls_ver.row
+      #gls_verNav
+        ul#gls_navBar.nav.flex-column.nav-pills
+              li.nav-item
+                a(class = 'nav-link active', id='navHome', href='#', role='tab') Home
+                if usertype == 'Admin'
+                  a(class = 'nav-link', id = 'navAddCourse', data-toggle='tab', href="#", role = "tab", aria-controls="navAddCourseContent", aria-selected = "false") Add course
+                  a(class = 'nav-link', id = 'navCourseList', data-toggle='tab', href="#", role = "tab", aria-controls="navAddCourseContent", aria-selected = "false") Course list
+                else if usertype == 'Student'
+                  a(class = 'nav-link', id = 'navStudentInfo', data-toggle='tab', href="#", role = "tab", aria-controls="navAddCourseContent", aria-selected = "false") Student Info
+                  a(class = 'nav-link', id = 'navCourseInfo', data-toggle='tab', href="#", role = "tab", aria-controls="navAddCourseContent", aria-selected = "false") Course Info
+                  a(class = 'nav-link', id = 'navCourseBag', data-toggle='tab', href="#", role = "tab", aria-controls="navAddCourseContent", aria-selected = "false") Course bag
+                  a(class = 'nav-link', href='/sugang') Goto Sugang
+      #gls_content
+        #HContent
+          center
+            img(id='navHomeContent', src='/image/gls_home.jpg')
+          if usertype=='Admin'
+            form(class='fade', id='navAddCourseContent', role='form', aria-labelledby='add-course-tab' method="POST")
+              h3
+                | Add Course 
+              p
+                | Class ID
+                input#newcourseid(type='text', name='newcourseid')
+              p
+                | Class Name 
+                input#newcoursename(type='text', name='newcoursename')
+              p
+                | Professor 
+                input#newcourseprofessor(type='text', name='newcourseprofessor')
+              p
+                | Maximum Students 
+                input#newcoursemax(type='text', name='newcoursemax')
+              p
+                | Credit 
+                input#newcoursecredit(type='text', name='newcoursecredit')
+              button#AddcourseBtn.btn.btn-info(type='button') Add Course
+            div(class='tab-pane fade', id='navCourseListContent', role='tab', aria-labelledby='course-list-tab')
+              h3
+                | Course List
+              table#coursetable(style="border-style:solid, border-width:2px, text-align:center,width:100%")
+                tr.tablec
+                  th.tablec
+                    | Class ID
+                  th.tablec
+                    | Class Name
+                  th.tablec
+                    | Professor
+                  th.tablec
+                    | Credit
+                  th.tablec
+                    | Maximum Student
+                  th.tablec
+                    | Now Registered Student
+                if allcourse
+                  each i in allcourse
+                    tr
+                      td.tablec
+                        | #{i.class_id}
+                      td.tablec
+                        | #{i.class_name}
+                      td.tablec
+                        | #{i.class_professor}
+                      td.tablec
+                        | #{i.class_credit}
+                      td.tablec
+                        | #{i.class_max}
+                      td.tablec
+                        | #{i.class_numreg}
+          if usertype == 'Student'
+            div(class='tab-pane fade', id='navStudentInfoContent', role='tab', aria-labelledby='course-list-tab')
+              h3
+                | Student Information
+              table#studentinfo(style='border-style:solid, margin:20px, width:100%, text-align:center')
+                tr
+                  th.tablec(colspan="2")
+                    | Name
+                  td.tablec(colspan="2")
+                    | #{std_info.student_name}
+                tr
+                  th.tablec(colspan="2")
+                    | Student Id
+                  td.tablec(colspan="2")
+                    | #{std_info.student_id}
+                tr
+                  th.tablec
+                    | Birth
+                  td.tablec
+                    | #{std_info.student_birth}
+                  th.tablec
+                    | Allowable credit
+                  td.tablec
+                    | #{std_info.allowcredit}
+                tr
+                  th.tablec(colspan="2")
+                    | Major
+                  td.tablec(colspan="2")
+                    | #{std_info.student_department}
+            div(class='tab-pane fade', id='navCourseInfoContent', role='tab', aria-labelledby='course-info-tab')
+              h3
+                | Course Info
+              table#stregtable(style-'border-style:soild, margin:20px, width:100%, text-align:center')
+                tr
+                  th.tablec
+                    | Class ID
+                  th.tablec
+                    | Class Name
+                  th.tablec
+                    | Professor
+                  th.tablec
+                    | Credit
+                  th.tablec
+                    | Maximum Students
+                if regs
+                  each i in regs
+                    tr
+                      td.tablec
+                        | #{i.class_id}
+                      td.tablec
+                        | #{i.class_name}
+                      td.tablec
+                        | #{i.class_professor}
+                      td.tablec
+                        | #{i.class_credit}
+                      td.tablec
+                        | #{i.class_max}
+
+            div(class='tab-pane fade', id='navCourseBagContent', role='tab', aria-labelledby='course-bag-tab')
+              h3
+                | Course List
+              table#stcoursetable(style='border-style:solid, margin:20px, width:100%, text-align:center')
+                tr
+                  th.tablec
+                    | Class ID
+                  th.tablec
+                    | Class Name
+                  th.tablec
+                    | Professor
+                  th.tablec
+                    | Credit
+                  th.tablec
+                    | Maximum Students
+                  th.tablec
+                    | Put in Bag
+                if allcourse
+                  each i in allcourse
+                    tr
+                      td.tablec
+                        | #{i.class_id}
+                      td.tablec
+                        | #{i.class_name}
+                      td.tablec
+                        | #{i.class_professor}
+                      td.tablec
+                        | #{i.class_credit}
+                      td.tablec
+                        | #{i.class_max}
+                      td.tablec
+                        button.putbagBtn.btn.btn-success(data-id=i.class_id) Put in your bag
+              h3
+                | Course Bag
+              table#coursebagtable(style='border-style:solid, margin:20px, width:100%, text-align:center')
+                tr
+                  th.tablec
+                    | Class ID
+                  th.tablec
+                    | Class Name
+                  th.tablec
+                    | Professor
+                  th.tablec
+                    | Credit
+                  th.tablec
+                    | Maximum Students
+                  th.tablec
+                    | Number of Registered Students
+                  th.tablec
+                    | Put out from Bag
+                each i in bags
+                  tr
+                    td.tablec
+                      | #{i.class_id}
+                    td.tablec
+                      | #{i.class_name}
+                    td.tablec
+                      | #{i.class_professor}
+                    td.tablec
+                      | #{i.class_credit}
+                    td.tablec
+                      | #{i.class_max}
+                    td.tablec
+                      | #{i.class_numreg}
+                    td.tablec
+                      button.delbagBtn.btn.btn-info(data-id=i.class_id) Put out from your bag
+  if cpage == 'CB'
+    script.
+      console.log("aaaaaa");
+      $('#navHome').removeClass('active');
+      $('#navHomeContent').hide();
+      $('#navHomeContent').removeClass('show');
+      $('#navHomeContent').addClass('hide');
+      $('#navStudentInfo').removeClass('active');
+      $('#navStudentInfoContent').hide();
+      $('#navStudentInfoContent').removeClass('show');
+      $('#navStudentInfoContent').addClass('hide');
+      $('#navCourseInfo').removeClass('active');
+      $('#navCourseInfoContent').hide();
+      $('#navCourseInfoContent').removeClass('show');
+      $('#navCourseInfoContent').addClass('hide');
+      $('#navCourseBag').addClass('active');
+      $('#navCourseBagContent').show();
+      $('#navCourseBagContent').addClass('show');
+      $('#navCourseBagContent').addClass('active');

@@ -1,0 +1,111 @@
+doctype html
+html
+	head
+		title Welcome Sugang
+		link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
+		script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', crossorigin='anonymous')
+		script(src='https://code.jquery.com/jquery-3.3.1.min.js', integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=', crossorigin='anonymous')
+		script(src='/javascript/script.js')
+		link(rel='stylesheet', type='text/css', href='/css/style.css')
+	body
+		#gls_row
+		#gls_ver.row
+			#gls_verNav
+				ul#gls_navBar.nav.flex-column.nav-pills
+					a(href='/gls')
+						img(id='SKKUlogo', src='/image/sugang_logo.jpg', style='width:100%')
+				table#studentinfo(style='border-style:solid, width : 100%, text-align:center, margin:20px')
+					tr
+						th.tableh
+							| Name
+						th.tableb
+							| #{std_info.student_name}
+					tr
+						th.tableh
+							| Student ID
+						th.tableb
+							| #{std_info.student_id}
+					tr
+						th.tableh
+							| Allowable Credits
+						th.tableb
+							| #{std_info.allowcredit}
+					tr
+						th.tableh
+							| Major
+						th.tableb
+							| #{std_info.student_department}
+			#gls_content
+				#HContent
+					center
+						img(id='sugang_head',src='/image/sugang_head.jpg')
+					br
+					h3
+						| Registered Courses
+					table#sugangregtable(style='border-style:solid, width:100%, text-align:center')
+						tr
+							th.tablec
+								| Class ID
+							th.tablec
+								| Class Name
+							th.tablec
+								| Professor
+							th.tablec
+								| Credit
+							th.tablec
+								| Maximum Students
+							th.tablec
+								| Now Registed Students
+							th.tablec
+								| Put in bags
+						each i in regs
+							tr
+								td.tablec
+									| #{i.class_id}
+								td.tablec
+									| #{i.class_name}
+								td.tablec
+									| #{i.class_professor}
+								td.tablec
+									| #{i.class_credit}
+								td.tablec
+									| #{i.class_max}
+								td.tablec
+									| #{i.class_numreg}
+								td.tablec
+									button.regcancelBtn.btn.btn-success(data-id=i.class_id) Cancel
+					br
+					h3
+						| Course Bag
+					table#sugangbagtable(style='border-style:solid, margin:20px, width:100%, text-align:center')
+						tr
+							th.tablec
+								| Class ID
+							th.tablec
+								| Class Name
+							th.tablec
+								| Professor
+							th.tablec
+								| Credit
+							th.tablec
+								| Maximum Students
+							th.tablec
+								| Now Registed Students
+							th.tablec
+								| Put out from Bag
+						each i in bags
+							tr
+								td.tablec
+									| #{i.class_id}
+								td.tablec
+									| #{i.class_name}
+								td.tablec
+									| #{i.class_professor}
+								td.tablec
+									| #{i.class_credit}
+								td.tablec
+									| #{i.class_max}
+								td.tablec
+									| #{i.class_numreg}
+								td.tablec
+									button.bagBtn.btn.btn-info(data-id=i.class_id) Register
