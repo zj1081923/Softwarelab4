@@ -35,7 +35,7 @@ var classes = new Schema({
 
 ## Gls_main
 * usertype을 admin과 student로 나눔
-* Admin
+* Admin   
   Home, Add course, Course list
-* Student
+* Student   
   Home, Student Info, Course info, Course bag, Go To Sugang
